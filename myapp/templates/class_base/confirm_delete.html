@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<form action="" method="POST">
+    {%csrf_token%}
+    <ul>
+        <h1>Xóa {{object.first_name}} {{object.last_name}} hong </h1>
+        <input type="submit" value="OK">
+        <br/>
+        <a href="{% url 'index' %}" class="btn btn-secondary" >Back</a>
+    </ul>
+</form>

@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% block title %}
+  sfsf
+{% endblock title %}
+{% block content %}
+  <div class="col-md-12">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Số thứ tự</th>
+            <th scope="col">Họ</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Email</th>
+            <th scope="col">Lựa chọn</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for reporter in all_reporters %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <!-- reporter_id=reporter.id: vì bên views.py có biến reporter_id nên phải thêm vào cho ló hiểu  -->
+                    <td> <a href="{% url 'view_detail_reporter' reporter_id=reporter.id %}"> {{reporter.first_name}} </a></td>
+                    <td>{{reporter.last_name}}</td>
+                    <td>{{reporter.email}}</td>
+                    <td> <a href="{% url 'view_reporter' pk=reporter.id %}"> <i class="bi bi-eye"> </i></a>
+                      |  <a href="{% url 'edit_reporter' pk=reporter.id %}"> <i class="bi bi-pencil"></i></a>
+                      |  <a href="{% url 'remove_reporter' pk=reporter.id %}"> <i class="bi bi-trash-fill"></i></a> 
+                      
+                    </td>
+                </tr>
+            {% endfor %}
+          </tr>
+        </tbody>
+    </table>
+  </div>
+
+  
+      
+    
+    
+
+{% endblock content %}

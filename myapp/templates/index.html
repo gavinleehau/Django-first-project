@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {%load static%}
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'our_team/team_style.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'id_style/index_style.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lienhe/lien_he.css'%}">
+  <body>
+
+  <div class="header">
+    <h2 class="logo">Python</h2>
+    <input type="checkbox" id="chk">
+    <label for="chk" class="show-menu-btn">
+      <i class="fas fa-ellipsis-h"></i>
+    </label>
+
+    <ul class="menu">
+      <a href="{% url 'all_reporters'%}">Reporter</a>
+      <a href="{% url 'add_article'%}">Add Article</a>
+      <!-- <a href="#">Services</a> -->
+      <!-- <a href="{% url 'login_user'%}">Login</a> -->
+      
+      {% if user.is_authenticated %}               
+          <a  href="{% url 'logout_user'%}"> Welcome {{user.first_name}} {{user.last_name}} </a>
+      {% else %}
+          <a  href="{% url 'login_user'%}"></i> Login</a>
+      {% endif %}
+      <a class="nav-link" href="{% url 'register_user'%}"><i class="bi bi-shield-lock"></i> Register</a>
+      <!-- <div class="middle">
+        <a class="btn" href="#">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="btn" href="#">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a class="btn" href="#">
+          <i class="fab fa-google"></i>
+        </a>
+        <a class="btn" href="#">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a class="btn" href="#">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div> -->
+      <!-- <a href="#">Contact</a> -->
+      <!-- <label for="chk" class="hide-menu-btn">
+        <i class="fas fa-times"></i>
+      </label> -->
+    </ul>
+  </div>
+
+<div class="content">
+  <div class="background"></div>
+        <div class="team-section">
+
+            <h1>Giới thiệu</h1>
+            <span class="boder"></span>
+        <div class="ps">
+            <a href="#p1"> <img src="{% static 'our_team/1.jpg' %}" alt="" width="300x" height="150x"></a>
+            <a href="#p2"> <img src="{% static 'our_team/2.jpg' %}" alt="" width="300px" height="150px"></a>
+            <a href="#p3"> <img src="{% static 'our_team/3.jpg' %}" alt="" width="200px" height="150px"></a>
+        </div>
+        <div class="section" id="p1">
+            <span class="name">Nhà báo Nguyễn Minh Hiền</span>
+            <span class="boder"></span>
+            <p>
+              Nhà báo Nguyễn Minh Hiền (Nguyễn Thị Hiền) nguyên phóng viên báo Giải Phóng, 
+              nguyên cán bộ Nhà xuất bản Tổng Hợp TP.HCM; nguyên Phó Tổng biên tập báo Phụ Nữ TP.HCM; 
+              nguyên Tổng biên tập Bản tin Công Thương và báo Doanh Nhân Sài Gòn; 
+              nguyên Chủ biên Văn hóa - Lối sống báo Sài Gòn Tiếp Thị (bộ cũ); nguyên Giám đốc Quỹ phát triển giáo dục EDF; 
+              thành viên Hội đồng biên tập tạp chí Người Đô Thị; Giám đốc Công ty Cổ phần Truyền thông V.U.I…
+            </p>
+        </div>
+    
+        <div class="section" id="p2">
+            <span class="name">Nguyễn Hữu Thọ</span>
+            <span class="boder"></span>
+            <p>
+              Hữu Thọ (sinh ngày 8 tháng 1 năm 1932, mất ngày 13 tháng 8 năm 2015). Tên khai sinh là Nguyễn Hữu Thọ, bút danh Hữu Thọ, Nhân Nghĩa, Nhân Chính là nhà báo, chính khách Việt Nam. Bạn đồng nghiệp thường gọi ông là NGƯỜI HAY CÃI (từ tên cuốn sách tiểu phẩm đầu tiên của ông xuất bản 1991, đồng thời như tính cách ngoài đời và phong cách báo chí của ông).
+            </p>
+        </div>
+    
+        <div class="section" id="p3">
+            <span class="name">Nhà báo Huỳnh Dũng Nhân</span>
+            <span class="boder"></span>
+            <p>
+              Huỳnh Dũng Nhân (sinh ngày mùng 3 tháng 3 năm 1955) là Nhà báo nổi tiếng của Việt Nam chuyên về thể loại Phóng sự. Những tác phẩm báo chí của ông làm say mê bạn đọc bởi những trăn trở về xã hội, thân phận con người qua ngòi bút giàu chất trữ tình, hóm hỉnh mà sâu sắc
+                
+              </p>
+  
+        </div>
+      </div>
+</div>
+  </body>
+</html>

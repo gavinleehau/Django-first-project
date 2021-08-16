@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- {%load static%} -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'our_team/team_style.css'%}"> -->
+    <title>Document</title>
+</head>
+<body>
+    <div class='col-sm-6 col-sm-offset-3'>
+        <!-- <h1>View detail reporter id {{reporter.id}} </h1> -->
+        <p>Name: {{reporter.first_name }} {{reporter.last_name}} </p>
+        <p>Email: {{reporter.email}} </p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Mu_rSdgpr8w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- <slug> Danh sách Articles: </slug> -->
+        <h4> Danh sách Articles: </h4>
+        <div class="col-sm-6">
+            <ul>
+                {% for article in reporter.article_set.all  %}
+                    <li> {{ article.headline }} </li>
+                    <!-- {% load static %}  -->
+                    <!-- <img src="{%static 'myweb/media/asuslogo.ipg'%}" width="300px" height="300px" /> -->
+
+                    <!-- <h4>{{article.date|date:"d-m-Y"}}</h4> -->
+                    <h4>{{article.date}}</h4>
+                {% endfor %}
+                <!-- <img src="{{article.image.url}}" width="300px" height="300px" /> -->
+
+                <!-- nút back 1: -->
+                <a href="{{article.image.ur}}" class="btn btn-secondary" >Back</a>
+
+            </ul>
+        </div>
+    </div>
+    
+    
+    
+      
+</body>
+</html>

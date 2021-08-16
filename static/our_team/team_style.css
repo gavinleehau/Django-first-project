@@ -1,0 +1,93 @@
+/* body {
+		
+	background-image: url(bg.jpg);
+    background-image: url(bien.jpg);
+    background-color: white;
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    filter: blur(4px);
+	
+} */
+body {
+		
+	background-image: url(bien.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(3px);
+	
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.team-section{
+    overflow: hidden;
+    text-align: center;
+    /* background: #34495e; */
+    padding: 60px;
+}
+.team-section h1{
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    color: black;
+    font-size: 40px;
+}
+.boder{
+    display: block;
+    margin: auto;
+    width: 160px;
+    height: 3px;
+    background: #3498db;
+    margin-bottom: 40px;
+}
+.ps{
+    margin-bottom: 40px;
+}
+.ps a{
+    display: inline-block;
+    margin: 0 30px;
+    /* width: 160px; */
+    /* height: -50px; */
+    /* line-height: 0px; */
+    overflow: hidden;
+    /* border-radius: 50%; */
+    width: 160px;
+    height: 160px;
+    /* background: red; */
+    border-radius: 50%;
+    /* border:4px solid blue; */
+    /* border-collapse: separate;  */
+    /* box-shadow: 0.375em 0.375em 0 0 rgba(15, 28, 63, 0.125); */
+}
+.ps a img{
+    width: 100%;
+    filter: grayscale(100%);
+    transition: 0.4s all;
+}
+.ps a:hover > img{
+    filter: none;
+}
+.section{
+    width: 600px;
+    margin: auto;
+    font-size: 20px;
+    color: black;
+    text-align: justify;
+    height: 0;
+    overflow: hidden;
+}
+.section:target{
+    height: auto;
+}
+.name{
+    display: block;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform:  uppercase;
+    font-size: 22px;
+
+}

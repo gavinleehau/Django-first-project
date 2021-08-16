@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load myfilter %} <!-- load templatetags-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>index</title>
+</head>
+<body>
+  <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="{% url 'index'%}">Python2104E</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+              <li class="nav-item">
+                <!-- <a class="nav-link" href="{% url 'all_reporters'%}">Reporter </a> -->
+              </li>
+                <a class="nav-link" href="{% url 'add_reporter'%}">Add Reporter <span class="sr-only">(current)</span></a>
+              </li>
+              <li>
+                <a class="nav-link" href="{% url 'add_article'%}">Add Article <span class="sr-only">(current)</span></a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li> -->
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'list_reporters'%}" >
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button id="search_input" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form><br>
+          </div>
+      </nav>
+      <div class="row">
+          <div class="col-md-12">
+              <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Numerical order</th>
+                      <th scope="col">First name</th>
+                      <th scope="col">Last name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Option</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for reporter in all_reporters %}
+                          <tr>
+                              <th scope="row">{{forloop.counter}}</th>
+                              <!-- reporter_id=reporter.id: vì bên views.py có biến reporter_id nên phải thêm vào cho ló hiểu  -->
+                              <td><a href="{% url 'view_detail_reporter' reporter_id=reporter.id %}"> {{reporter.first_name}} </a></td>
+                              <td>{{reporter.last_name}}</td>
+                              <td>{{reporter.email}}</td>
+                              <td> <a href="{% url 'view_reporter' pk=reporter.id %}"> <i class="bi bi-eye"> </i></a>
+                                |  <a href="{% url 'edit_reporter' pk=reporter.id %}"><i class="bi bi-pencil"></i></a>
+                                |  <a data-id="{{reporter.id}}" class="remove-btn" data-url="{% url 'remove_reporter' pk=reporter.id %}">  <i class="bi bi-trash-fill"></i></a> 
+                                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                  Launch demo modal
+                                </button> -->
+                                
+                                <!-- <form action="{% url 'remove_reporter' pk=reporter.id %}" method="POST">
+                                  {% csrf_token %}
+                                  <button data-id="{{reporter.id}}" class="remove-btn" type="button" ><i class="bi bi-trash-fill"></i></button>
+                                </form> -->
+                              </td>
+                          </tr>
+                      {% endfor %}
+                      
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+            
+          
+          <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a title="Go First Page"class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo; First</span>
+                  </a>
+                </li>
+                {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                      <span aria-hidden="true">&lsaquo;</span>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="?page?{{ page_obj }}" aria-label="Previous">
+                      <span aria-hidden="true">&lsaquo; </span>
+                    </a>
+                  </li>
+                {% endif %}
+                {% for page_index in page_obj.paginator.num_pages|make_range  %}
+                <!-- kiểm tra xem đang đứng page nao -->
+                  
+                  {% if page_index == page_obj.number %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ page_index}}</a></li>                   
+                  {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_index }}">{{ page_index}}</a></li>     
+                  {% endif %}
+                  
+
+                {% endfor %}
+                <!-- Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} xem dang page nào-->
+                  
+                <!-- <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+                <li class="page-item"><a class="page-link" href="?page=3">3</a></li> -->
+                
+                {% if page_obj.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                      <span aria-hidden="true">&rsaquo;</span> <!-- html5 entities R-->
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&rsaquo;</span> 
+                    </a>
+                  </li>
+                {% endif %}
+                <li class="page-item">
+                  <a title="Go Last Page"class="page-link" href="#" aria-label="Last">
+                    <span aria-hidden="true">Last &raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+      </div>
+  </div>
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <form id="remove_form" action="" method="POST">
+      {% csrf_token %}
+      
+    
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Remove</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Họ: <span id="first_name_datele"> </span> </p>
+            <p>Tên: <span id="last_name_datele"> </span> </p>
+            <p>Emai: <span id="email_datele"> </span> </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Detele</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    $(".remove-btn").each(function(){
+      $(this).click(function(){
+        var remove_url = ($(this).data("url"));
+        $('#remove_form').attr('action', remove_url);
+        $("#first_name_datele").text($(this).parent().parent().children('td').eq(0).text());
+        $("#last_name_datele").text($(this).parent().parent().children('td').eq(1).text());
+        $("#email_datele").text($(this).parent().parent().children('td').eq(2).text());
+        $('#deleteModal').modal('show');
+      });
+    });
+
+  </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
